@@ -1,5 +1,5 @@
+var should = chai.should();
 describe('Diner\'s Club', function() {
-  var should = chai.should();
   it('has a prefix of 38 and a length of 14', function() {
     detectNetwork('38345678901234').should.equal('Diner\'s Club');
   });
@@ -7,9 +7,7 @@ describe('Diner\'s Club', function() {
     detectNetwork('39345678901234').should.equal('Diner\'s Club');
   });
 });
-
 describe('American Express', function() {
-  var should = chai.should();
   it('has a prefix of 34 and a length of 15', function() {
     detectNetwork('343456789012345').should.equal('American Express');
   });
@@ -17,9 +15,7 @@ describe('American Express', function() {
     detectNetwork('373456789012345').should.equal('American Express');
   });
 });
-
 describe('Visa', function() {
-  var should = chai.should();
   it('has a prefix of 4 and a length of 13', function() {
     detectNetwork('4123456789012').should.equal('Visa');
   });
@@ -30,9 +26,7 @@ describe('Visa', function() {
     detectNetwork('4123456789012345678').should.equal('Visa');
   });
 });
-
 describe('MasterCard', function() {
-  var should = chai.should();
   for (var prefix = 51; prefix <= 55; prefix++) {
     (function(prefix) {
       it('has a prefix of ' + prefix + ' and a length of 16', function() {
@@ -41,9 +35,7 @@ describe('MasterCard', function() {
     })(prefix);
   }
 });
-
 describe('Discover', function() {
-  var should = chai.should();
   it('has a prefix of 65 and a length of 16', function() {
     detectNetwork('6511123456789012').should.equal('Discover');
   });
@@ -67,9 +59,7 @@ describe('Discover', function() {
     detectNetwork('6011123456789012345').should.equal('Discover');
   });
 });
-
 describe('Maestro', function() {
-  var should = chai.should();
   it('has a prefix of 5018 and a length of 12', function() {
     detectNetwork('501812345678').should.equal('Maestro');
   });
@@ -167,9 +157,7 @@ describe('Maestro', function() {
     detectNetwork('6304123456789012345').should.equal('Maestro');
   });
 });
-
 describe('China UnionPay', function() {
-  var should = chai.should();
   for (var prefix = 624; prefix <= 626; prefix++) {
     (function(prefix) {
       it('has a prefix of ' + prefix + ' and a length of 16', function() {
@@ -219,9 +207,7 @@ describe('China UnionPay', function() {
     })(prefix);
   }
 });
-
 describe('Switch', function() {
-  var should = chai.should();
   it('has a prefix of 4903 and a length of 16', function() {
     detectNetwork('4903456789012345').should.equal('Switch');
   });

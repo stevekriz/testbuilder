@@ -1,44 +1,64 @@
-var detectNetwork = function(cardNumber) {
-  length = cardNumber.length;
-  if ((length >= 16 && length <= 19)
-    && ((cardNumber.slice(0, 3) >= 624 && cardNumber.slice(0, 3) <= 626)
-    || (cardNumber.slice(0, 4) >= 6282 && cardNumber.slice(0, 4) <= 6288)
-    || (cardNumber.slice(0, 6) >= 622126 && cardNumber.slice(0, 6) <= 622925))
-  ) {
-    return 'China UnionPay';
-  } else if ((length === 16 || length === 18 || length === 19)
-    && (cardNumber.startsWith('4903') || cardNumber.startsWith('4905')
-    || cardNumber.startsWith('4911') || cardNumber.startsWith('4936')
-    || cardNumber.startsWith('6333') || cardNumber.startsWith('6759')
-    || cardNumber.startsWith('564182') || cardNumber.startsWith('633110'))
-  ) {
-    return 'Switch';
-  } else if ((length >= 12 && length <= 19)
-    && (cardNumber.startsWith('5018') || cardNumber.startsWith('5020')
-    || cardNumber.startsWith('5038') || cardNumber.startsWith('6304'))
-  ) {
-    return 'Maestro';
-  } else if ((length === 16 || length === 19)
-    && (cardNumber.startsWith('65')
-    || (cardNumber.slice(0, 3) >= 644 && cardNumber.slice(0, 3) <= 649)
-    || (cardNumber.startsWith('6011')))
-  ) {
-    return 'Discover';
-  } else if (length === 16
-    && (cardNumber.slice(0, 2) >= 51 && cardNumber.slice(0, 2) <= 55)
-  ) {
-    return 'MasterCard';
-  } else if ((length === 13 || length === 16 || length === 19)
-    && cardNumber.startsWith('4')
-  ) {
-    return 'Visa';
-  } else if (length === 14
-    && (cardNumber.startsWith('38') || cardNumber.startsWith('39'))
-  ) {
-    return 'Diner\'s Club';
-  } else if (length === 15
-    && (cardNumber.startsWith('34') || cardNumber.startsWith('37'))
-  ) {
-    return 'American Express';
+const range = (start, end) => {
+  const result = [];
+  for (let i = start; i <= end; i++) {
+    result.push(i);
+  }
+  return result;
+};
+const cardNetworks = ['chinaUnionPay', 'switch', 'maestro', 'discover',
+  'masterCard', 'dinersClub', 'visa', 'americanExpress'
+];
+const cardParameters = {
+  chinaUnionPay: {
+    name: 'China UnionPay',
+    prefixes: [...range(624, 626), ...range(6282, 6288), ...range(622126, 622925)],
+    lengths: [...range(16, 19)]
+  },
+  switch: {
+    name: 'Switch',
+    prefixes: [4903, 4905, 4911, 4936, 6333, 6759, 564182, 633110],
+    lengths: [16, 18, 19],
+  },
+  maestro: {
+    name: 'Maestro',
+    prefixes: [5018, 5020, 5038, 6304],
+    lengths: [...range(12, 19)]
+  },
+  discover: {
+    name: 'Discover',
+    prefixes: [65, ...range(644, 649), 6011],
+    lengths: [16, 19]
+  },
+  masterCard: {
+    name: 'MasterCard',
+    prefixes: [...range(51, 55)],
+    lengths: [16]
+  },
+  dinersClub: {
+    name: 'Diner\'s Club',
+    prefixes: [38, 39],
+    lengths: [14]
+  },
+  visa: {
+    name: 'Visa',
+    prefixes: [4],
+    lengths: [13, 16, 19]
+  },
+  americanExpress: {
+    name: 'American Express',
+    prefixes: [34, 37],
+    lengths: [15]
+  }
+};
+const isValidCardNumber = (network, cardNumber) => {
+  const isValidLength = cardParameters[network].lengths.includes(cardNumber.length);
+  const isValidPrefix = cardParameters[network].prefixes.some(prefix => cardNumber.startsWith(prefix));
+  return isValidLength && isValidPrefix;
+};
+var detectNetwork = cardNumber => {
+  for (const network of cardNetworks) {
+    if (isValidCardNumber(network, cardNumber)) {
+      return cardParameters[network].name;
+    }
   }
 };

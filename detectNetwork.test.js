@@ -1,7 +1,9 @@
+/* eslint-disable no-loop-func */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
 const should = chai.should();
-const getRandomInt = (min, max) => {
-  return Math.floor(Math.random() * (max - min) + min);
-};
+const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min) + min);
 const generateCardNumber = (prefix, length) => {
   let cardNumber = prefix.toString();
   while (cardNumber.length < length) {
@@ -11,10 +13,12 @@ const generateCardNumber = (prefix, length) => {
 };
 for (const network of cardNetworks) {
   describe(cardParameters[network].name, () => {
-    cardParameters[network].prefixes.forEach(prefix => {
-      cardParameters[network].lengths.forEach(length => {
-        it('has a prefix of ' + prefix + ' and a length of ' + length, function() {
-          detectNetwork(generateCardNumber(prefix, length)).should.equal(cardParameters[network].name);
+    cardParameters[network].prefixes.forEach((prefix) => {
+      cardParameters[network].lengths.forEach((length) => {
+        it(`has a prefix of ${prefix} and a length of ${length}`, () => {
+          detectNetwork(
+            generateCardNumber(prefix, length),
+          ).should.equal(cardParameters[network].name);
         });
       });
     });

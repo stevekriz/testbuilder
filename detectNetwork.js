@@ -68,14 +68,14 @@ const isValidCardNumber = (network, cardNumber) => {
   const isValidLength = cardParameters[network].lengths.includes(
     cardNumber.length
   );
-  const isValidPrefix = cardParameters[network].prefixes.some((prefix) =>
+  const isValidPrefix = cardParameters[network].prefixes.some(prefix =>
     cardNumber.startsWith(prefix)
   );
 
   return isValidLength && isValidPrefix;
 };
 
-var detectNetwork = (cardNumber) => {
+var detectNetwork = cardNumber => {
   for (const network of cardNetworks) {
     if (isValidCardNumber(network, cardNumber))
       return cardParameters[network].name;

@@ -15,8 +15,8 @@ const generateCardNumber = (prefix, length) => {
 
 for (const network of cardNetworks) {
   describe(cardParameters[network].name, () => {
-    cardParameters[network].prefixes.forEach((prefix) => {
-      cardParameters[network].lengths.forEach((length) => {
+    cardParameters[network].prefixes.forEach(prefix => {
+      cardParameters[network].lengths.forEach(length => {
         it(`has a prefix of ${prefix} and a length of ${length}`, () => {
           detectNetwork(generateCardNumber(prefix, length)).should.equal(
             cardParameters[network].name

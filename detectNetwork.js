@@ -7,19 +7,19 @@ const range = (start, end) => {
 };
 
 const cardNetworks = [
-  "chinaUnionPay",
-  "switch",
-  "maestro",
-  "discover",
-  "masterCard",
-  "dinersClub",
-  "visa",
-  "americanExpress",
+  'chinaUnionPay',
+  'switch',
+  'maestro',
+  'discover',
+  'masterCard',
+  'dinersClub',
+  'visa',
+  'americanExpress',
 ];
 
 const cardParameters = {
   chinaUnionPay: {
-    name: "China UnionPay",
+    name: 'China UnionPay',
     prefixes: [
       ...range(624, 626),
       ...range(6282, 6288),
@@ -28,22 +28,22 @@ const cardParameters = {
     lengths: [...range(16, 19)],
   },
   switch: {
-    name: "Switch",
+    name: 'Switch',
     prefixes: [4903, 4905, 4911, 4936, 6333, 6759, 564182, 633110],
     lengths: [16, 18, 19],
   },
   maestro: {
-    name: "Maestro",
+    name: 'Maestro',
     prefixes: [5018, 5020, 5038, 6304],
     lengths: [...range(12, 19)],
   },
   discover: {
-    name: "Discover",
+    name: 'Discover',
     prefixes: [65, ...range(644, 649), 6011],
     lengths: [16, 19],
   },
   masterCard: {
-    name: "MasterCard",
+    name: 'MasterCard',
     prefixes: [...range(51, 55)],
     lengths: [16],
   },
@@ -53,12 +53,12 @@ const cardParameters = {
     lengths: [14],
   },
   visa: {
-    name: "Visa",
+    name: 'Visa',
     prefixes: [4],
     lengths: [13, 16, 19],
   },
   americanExpress: {
-    name: "American Express",
+    name: 'American Express',
     prefixes: [34, 37],
     lengths: [15],
   },
